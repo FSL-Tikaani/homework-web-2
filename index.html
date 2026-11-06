@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Поиск персонажей «Рика и Морти» через публичный Rick and Morty API" />
+    <title>Рик и Морти — персонажи</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Рик и Морти</h1>
+      <p class="subtitle">Персонажи из публичного API: ищите по имени и фильтруйте по статусу</p>
+    </header>
+
+    <main class="container">
+      <form id="filters" class="filters" autocomplete="off">
+        <label class="field">
+          <span>Имя</span>
+          <input id="search" name="name" type="search" placeholder="Например, Rick" />
+        </label>
+
+        <label class="field">
+          <span>Статус</span>
+          <select id="status" name="status">
+            <option value="">Любой</option>
+            <option value="alive">Живой</option>
+            <option value="dead">Мёртвый</option>
+            <option value="unknown">Неизвестно</option>
+          </select>
+        </label>
+
+        <div class="actions">
+          <button type="submit" id="submit-btn">Найти</button>
+          <button type="button" id="refresh-btn" class="secondary">Обновить</button>
+          <button type="button" id="error-test-btn" class="danger">Тест ошибки</button>
+        </div>
+      </form>
+
+      <p id="summary" class="summary" aria-live="polite"></p>
+
+      <!-- Одновременно виден только один из блоков: загрузка, ошибка, пусто или список -->
+      <div id="loading" class="state" role="status" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Загрузка…</p>
+      </div>
+
+      <div id="error" class="state state-error" role="alert" hidden>
+        <p id="error-text">Не удалось загрузить данные.</p>
+        <button type="button" id="retry-btn">Повторить попытку</button>
+      </div>
+
+      <div id="empty" class="state" hidden>
+        <p>Ничего не найдено</p>
+      </div>
+
+      <ul id="cards" class="cards"></ul>
+
+      <nav id="pager" class="pager" aria-label="Страницы" hidden>
+        <button type="button" id="prev-btn" class="secondary">← Назад</button>
+        <span id="page-info"></span>
+        <button type="button" id="next-btn" class="secondary">Вперёд →</button>
+      </nav>
+    </main>
+
+    <footer class="footer">
+      Данные:
+      <a href="https://rickandmortyapi.com/" target="_blank" rel="noopener">Rick and Morty API</a>
+      · список API:
+      <a href="https://github.com/public-apis/public-apis" target="_blank" rel="noopener">public-apis</a>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
